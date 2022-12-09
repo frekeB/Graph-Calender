@@ -89,5 +89,24 @@ function Timeline ({ range, data, colorFunc}){
 }
 function App(){
 
-    let StartDat
+    let StartDate =moment().add(-365, 'days');
+    let dateRange = [startDate, moment()];
+
+    let data =Array.from(new Array(365)).map((_, index)=>{
+        return{
+            date: moment(startDate).add(index, 'days'),
+            value: Math.floor(Math.random() * 100),
+        };
+    });
+
+    return(
+        <>
+        <Timeline range={dateRange} data={data} colorFunc={({alpha}) => `rgba(3, 160, 3, ${alpha})`} />
+        <Timeline range={dateRange} data={data} colorFunc={({alpha}) => `rgba(220, 5, 3, ${alpha})`} />
+        <Timeline range={dateRange} data={data} colorFunc={({ alpha}) => `rgba(5, 5, 200, ${alpha})`} />
+        </>
+
+    )
 }
+
+ReactDom.render(<App />, document.getElementById('container'));
